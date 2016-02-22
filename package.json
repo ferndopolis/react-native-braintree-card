@@ -1,0 +1,19 @@
+{
+  "name": "react-native-braintree-card",
+  "version": "0.0.1",
+  "description": "A react native interface for adding Braingtree card payments methods",
+  "main": "js/BraintreeCard.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferndopolis/react-native-braintree-card.git"
+  },
+  "author": "Fernando Marcheselli <fmarcheselli@gmail.com> (https://github.com/ferndopolis)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ferndopolis/react-native-braintree-card/issues"
+  },
+  "homepage": "https://github.com/ferndopolis/react-native-braintree-card/",
+  "peerDependencies": {
+    "react-native": ">=0.17.0"
+  }
+}
