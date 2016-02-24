@@ -1,6 +1,6 @@
 {
   "name": "react-native-braintree-card",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A react native interface for adding Braingtree card payments methods",
   "main": "js/BraintreeCard.js",
   "repository": {
