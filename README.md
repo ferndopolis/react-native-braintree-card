@@ -6,12 +6,19 @@ A react native interface for adding Braintree card payment methods.
 
 ### Setup
 ```js
-var BTClient = require('react-native-braintree-card');
-BTClient.setup(<token>);
+
+// in your componentDidMount() block
+var BraintreeCardClient = require('react-native-braintree-card');
+BraintreeCardClient.setup(<token>);
+
+// handle form submit event after user inputs card detail
+BraintreeCardClient.addCard( card, expMonth, expYear, cvv, (error, nonce) => {
+   // handle your error accordingly or pass nonce to your server
+});
 ```
 
 ## Installation
-1. Run `npm install react-native-braintree-tree --save` to add the package
+1. Run `npm install react-native-braintree-card --save` to add the package
 2. Inside the ``ios/`` directory, create a Podfile:
 
   ```ruby
@@ -48,18 +55,13 @@ BTClient.setup(<token>);
 
 5. Under your app target -> build settings, look for `Other Linker Flags` and add `$(inherited)`
 
-  <!--![Accepts Credit/Debit Cards](/Screenshots/linker.png)-->
-
 6. Build and run project!  If it fails the first time, clean and rebuild.
 
 Because React Native's iOS code is now pulled in via CocoaPods, you also need to remove the ``React``, ``RCTImage``, etc. subprojects from your app's Xcode project.
 
-![Remove Libraries](/Screenshots/removeLibraries.png)
-
-
 ## Requirements
 
 Tested with:
-* Node 4.1.0
-* npm 2.14.3
-* react-native 0.8.0
+* Node 5.6.0
+* npm 3.6.0
+* react-native 0.17.0
