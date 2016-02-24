@@ -3,12 +3,12 @@
 var RNBraintreeCard = require('react-native').NativeModules.RNBraintreeCard;
 
 var BraintreeCard = {
-    initWithAuthorization: function(clientToken) {
-        RNBraintreeCard.initWithAuthorizaiton(clientToken);
-    }
+    initWithAuthorization(clientToken) {
+        RNBraintreeCard.initWithAuthorization(clientToken);
+    },
 
-    addCard: function(card, expirationMonth, expirationYear, ccs, callback) {
-        RNBraintreeCard.addCard(card, expirtationMonth, expirationYear, ccv, callback);
+    addCard(cardNumber, expirationMonth, expirationYear, cvv, callback) {
+        RNBraintreeCard.addCard(cardNumber, expirationMonth, expirationYear, cvv, callback);
     }
 };
 
