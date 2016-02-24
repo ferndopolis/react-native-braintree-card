@@ -24,11 +24,12 @@ RCT_EXPORT_METHOD(addCard: (NSString *)cardNumber
 
   [self.cardClient tokenizeCard: card
     completion:^(BTCardNonce *tokenizedCard, NSError *error) {
-
-      NSLog(@"In Completion Method");
       NSArray *args = @[];
+      // need to handle when tokenizedCard is nil and pass error message to callback
       if ( error == nil ) {
         args = @[[NSNull null], tokenizedCard.nonce];
+      } else {
+        args = @[error.description, [NSNull null]];
       }
 
       callback(args);
