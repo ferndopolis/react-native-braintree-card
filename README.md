@@ -1,19 +1,23 @@
 # react-native-braintree-card
 
-A react native interface for adding Braintree card payment methods.
+A react native interface for handling Braintree's card nonce creation,
+when using a custom credit card UI.
+
+For those using the Braintree's v.zero SDK, check out [react-native-braintree](https://github.com/alawong/react-native-braintree).
 
 ## Usage
 
 ### Setup
 ```js
+// outside of your componet
+import BraintreeCardClient from 'react-native-braintree-card';
 
 // in your componentDidMount() block
-var BraintreeCardClient = require('react-native-braintree-card');
 BraintreeCardClient.setup(<token>);
 
 // handle form submit event after user inputs card detail
-BraintreeCardClient.addCard( card, expMonth, expYear, cvv, (error, nonce) => {
-   // handle your error accordingly or pass nonce to your server
+BraintreeCardClient.getCardNonce( card, expMonth, expYear, cvv, (error, nonce) => {
+   // if error handle accordingly or pass nonce to your server
 });
 ```
 

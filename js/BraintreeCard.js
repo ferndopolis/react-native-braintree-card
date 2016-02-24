@@ -7,8 +7,8 @@ var BraintreeCard = {
         RNBraintreeCard.initWithAuthorization(clientToken);
     },
 
-    addCard(cardNumber, expirationMonth, expirationYear, cvv, callback) {
-        RNBraintreeCard.addCard(cardNumber, expirationMonth, expirationYear, cvv, callback);
+    getCardNonce(cardNumber, expirationMonth, expirationYear, cvv, callback) {
+        RNBraintreeCard.getCardNonce(cardNumber, expirationMonth, expirationYear, cvv, callback);
     }
 };
 

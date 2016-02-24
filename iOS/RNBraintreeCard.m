@@ -10,7 +10,7 @@ RCT_EXPORT_METHOD(initWithAuthorization: (NSString *)clientToken)
     self.cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
 }
 
-RCT_EXPORT_METHOD(addCard: (NSString *)cardNumber
+RCT_EXPORT_METHOD(getCardNonce: (NSString *)cardNumber
           expirationMonth: (NSString *)expirationMonth
            expirationYear: (NSString *)expirationYear
                       cvv: (NSString *)cvv
