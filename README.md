@@ -13,7 +13,7 @@ For those using the Braintree's v.zero SDK, check out [react-native-braintree](h
 import BraintreeCardClient from 'react-native-braintree-card';
 
 // in your componentDidMount() block
-BraintreeCardClient.setup(<token>);
+BraintreeCardClient.initWithAuthorization(<token>);
 
 // handle form submit event after user inputs card detail
 BraintreeCardClient.getCardNonce( card, expMonth, expYear, cvv, (error, nonce) => {
