@@ -24,17 +24,33 @@ app.get("/get_token", function (req, res) {
 });
 
 app.post("/add-payment-method", function (req, res) {
-	var nonce = req.body.payment_method_nonce;
+  var name = req.body.name.split(' ');
+  var firstName = name[0];
+  var lastName = name[name.length - 1];
+	var nonce = req.body.nonce;
 
 	// Use payment method nonce here
-	console.log("Creating payment method against nonce: " + nonce);
-	gateway.paymentMethod.create({
-  		customerId: uuid.v4(),
-  		paymentMethodNonce: nonce,
-	}, function (err, result) {
-		console.log("payment method result: " + result.success);
-		res.send();
-	});
+	console.log("Creating payment method against nonce: ", firstName, lastName, nonce);
+  gateway.customer.create({
+    firstName: firstName,
+    lastName: lastName
+  }, function (err, result) {
+    if (result.success) {
+    	gateway.paymentMethod.create({
+          customerId: result.customer.id,
+      		paymentMethodNonce: nonce,
+    	}, function (err, result) {
+        if (result.success) {
+      		console.log('add-payment-method created!');
+        } else {
+      		console.log('add-payment-method failed: ', result.message);
+        }
+    		res.send();
+    	});
+    } else {
+      console.log('Error creating customer: ', result.message);
+    }
+  });
 });
 
 app.post("/pay", function (req, res) {

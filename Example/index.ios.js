@@ -1,22 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
 import BTClient from 'react-native-braintree-card';
 
 export default class Example extends Component {
-  static state = {
+  state = {
     name: '',
     creditCard: '',
     expMonth: '',
@@ -44,6 +39,16 @@ export default class Example extends Component {
     BTClient.getCardNonce(creditCard, expMonth, expYear)
       .then(nonce => {
         console.log('Nonce: ', nonce);
+        fetch('http://localhost:3000/add-payment-method', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            nonce: nonce,
+            name: name
+          })
+        })
       })
       .catch(err => {
         console.log('ERROR with payment: ', err);
@@ -59,6 +64,7 @@ export default class Example extends Component {
           placeholder="Name"
           returnKeyType="next"
           blurOnSubmit={false}
+          value={this.state.name}
           onChangeText={(name) => this.setState({name})}
           onSubmitEditing={() => this.focusNextField('2')}
         />
@@ -68,6 +74,7 @@ export default class Example extends Component {
           placeholder="Credit Card Number"
           keyboardType="numeric"
           returnKeyType="next"
+          value={this.state.creditCard}
           blurOnSubmit={false}
           onChangeText={(creditCard) => this.setState({creditCard})}
           onSubmitEditing={() => this.focusNextField('3')}
@@ -80,6 +87,7 @@ export default class Example extends Component {
             keyboardType="numeric"
             returnKeyType="next"
             blurOnSubmit={false}
+            value={this.state.expMonth}
             onChangeText={(expMonth) => this.setState({expMonth})}
             onSubmitEditing={() => this.focusNextField('4')}
           />
@@ -90,6 +98,7 @@ export default class Example extends Component {
             keyboardType="numeric"
             returnKeyType="next"
             blurOnSubmit={false}
+            value={this.state.expYear}
             onChangeText={(expYear) => this.setState({expYear})}
             onSubmitEditing={() => this.focusNextField('5')}
           />
@@ -99,10 +108,17 @@ export default class Example extends Component {
             placeholder="CVC"
             returnKeyType="done"
             blurOnSubmit={false}
+            value={this.state.cvc}
             onChangeText={(cvc) => this.setState({cvc})}
             onSubmitEditing={() => this.sumbitForm()}
           />
         </View>
+        <TouchableOpacity
+          onPress={this.sumbitForm.bind(this)}
+          style={styles.button}
+        >
+          <Text style={styles.text}>Sumbit</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -127,6 +143,17 @@ const styles = StyleSheet.create({
     padding: 4,
     marginBottom: 20,
   },
+  button: {
+    width: 100,
+    height: 30,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold'
+  }
 });
 
 AppRegistry.registerComponent('Example', () => Example);
