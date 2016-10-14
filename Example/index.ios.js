@@ -25,7 +25,13 @@ export default class Example extends Component {
   }
 
   componentDidMount() {
-    BTClient.initWithAuthorization('sandbox_6r26tptf_9czv2m8zrn6tfckj');
+    fetch('http://localhost:3000/get_token', {method: "GET"})
+      .then((response) => response.json())
+      .then((responseData) => {
+        var clientToken = responseData.clientToken;
+        console.log('Server responseData: ', responseData);
+        BTClient.initWithAuthorization(clientToken);
+      });
   }
 
   focusNextField = (nextField) => {
