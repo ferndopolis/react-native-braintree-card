@@ -4,7 +4,7 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(initWithAuthorization: (NSString *)clientToken)
+RCT_EXPORT_METHOD(initWithAuthorization: (NSString *)clientToken callback:(RCTResponseSenderBlock)callback)
 {
     self.braintreeClient = [[BTAPIClient alloc] initWithAuthorization: clientToken];
     self.cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];

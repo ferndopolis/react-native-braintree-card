@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+target 'Example' do
+    pod 'React', :path => '../node_modules/react-native', :subspecs => [
+      'Core',
+      'RCTImage',
+      'RCTNetwork',
+      'RCTText',
+      'RCTWebSocket'
+    ]
+    pod 'react-native-braintree-card', :path => '../node_modules/react-native-braintree-card'
+end

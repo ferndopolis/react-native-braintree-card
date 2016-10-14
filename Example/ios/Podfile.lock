@@ -1,0 +1,42 @@
+PODS:
+  - Braintree/Card (4.7.0):
+    - Braintree/Core
+  - Braintree/Core (4.7.0)
+  - React (0.35.0):
+    - React/Core (= 0.35.0)
+  - react-native-braintree-card (0.0.1):
+    - Braintree/Card (~> 4.0)
+    - React
+  - React/Core (0.35.0)
+  - React/RCTImage (0.35.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTNetwork (0.35.0):
+    - React/Core
+  - React/RCTText (0.35.0):
+    - React/Core
+  - React/RCTWebSocket (0.35.0):
+    - React/Core
+
+DEPENDENCIES:
+  - react-native-braintree-card (from `../node_modules/react-native-braintree-card`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  react-native-braintree-card:
+    :path: "../node_modules/react-native-braintree-card"
+
+SPEC CHECKSUMS:
+  Braintree: 2d53c805e93a5830a4359a757be50fc0f25392a9
+  React: d80af5410aa500d0cb1bce2cc4493a584cf2ec92
+  react-native-braintree-card: 6746efed2a191ae1c270fb0de9a5c84eeafd8cfc
+
+PODFILE CHECKSUM: 82992b1277d860e6819f796c6d38d10175ddb66b
+
+COCOAPODS: 1.0.0
