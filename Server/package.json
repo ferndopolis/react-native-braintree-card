@@ -5,7 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.14.1",
-    "braintree": "^1.35.0",
+    "braintree": "^1.42.0",
     "dotenv": "~1.2.0",
     "express": "~4.13.1",
     "node-uuid": "^1.4.7"

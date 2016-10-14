@@ -12,12 +12,21 @@ var BraintreeCard = {
 
   },
 
-  getCardNonce(cardNumber, expirationMonth, expirationYear, cvv, callback) {
-    return new Promise( function(resolve, reject) {
-      RNBraintreeCard.getCardNonce(cardNumber, expirationMonth, expirationYear, cvv, function(err, nonce) {
-        nonce != null ? resolve(nonce) : reject(err);
-      });
-    })
+  getCardNonce(cardNumber, expirationMonth, expirationYear, cvv) {
+    if (typeof cardNumber === 'object') {
+      return new Promise( function(resolve, reject) {
+        console.log('Ca')
+        RNBraintreeCard.getCardNonceObj(cardNumber, function(err, nonce) {
+          nonce != null ? resolve(nonce) : reject(err);
+        });
+      })
+    } else {
+      return new Promise( function(resolve, reject) {
+        RNBraintreeCard.getCardNonce(cardNumber, expirationMonth, expirationYear, cvv, function(err, nonce) {
+          nonce != null ? resolve(nonce) : reject(err);
+        });
+      })
+    }
   }
 };
 

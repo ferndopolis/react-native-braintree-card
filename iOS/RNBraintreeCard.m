@@ -25,7 +25,26 @@ RCT_EXPORT_METHOD(getCardNonce: (NSString *)cardNumber
   [self.cardClient tokenizeCard: card
     completion:^(BTCardNonce *tokenizedCard, NSError *error) {
       NSArray *args = @[];
-      // need to handle when tokenizedCard is nil and pass error message to callback
+      if ( error == nil ) {
+        args = @[[NSNull null], tokenizedCard.nonce];
+      } else {
+        args = @[error.description, [NSNull null]];
+      }
+
+      callback(args);
+  }];
+}
+
+RCT_EXPORT_METHOD(
+  getCardNonceObj: (NSDictionary *)parameters
+  callback: (RCTResponseSenderBlock)callback
+)
+{
+  BTCard *card = [[BTCard alloc] initWithParameters:parameters];
+
+  [self.cardClient tokenizeCard: card
+    completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+      NSArray *args = @[];
       if ( error == nil ) {
         args = @[[NSNull null], tokenizedCard.nonce];
       } else {
