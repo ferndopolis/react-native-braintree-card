@@ -36,7 +36,27 @@ export default class Example extends Component {
   sumbitForm() {
     const { name, creditCard, expMonth, expYear, cvc } = this.state;
     console.log('Sumbit Form: ', name, creditCard, expMonth, expYear, cvc);
-    BTClient.getCardNonce(creditCard, expMonth, expYear)
+    BTClient.getCardNonce({
+      number: creditCard,
+      expirationMonth: expMonth,
+      expirationYear: expYear,
+      cvv: cvc,
+      cardholderName: 'Tee Zee Bee',
+
+      billing_address: {
+        street_address: '123 Cools Street',
+        postal_code: '12341',
+        locality: 'Los Angeles',
+        region: 'California',
+        country_code_alpha2: 'US',
+        country_name: 'United States of America',
+      },
+
+      options: {
+        validate: false,
+      }
+    })
+    // BTClient.getCardNonce(creditCard, expMonth, expYear, cvc)
       .then(nonce => {
         console.log('Nonce: ', nonce);
         fetch('http://localhost:3000/add-payment-method', {
