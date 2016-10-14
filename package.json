@@ -15,5 +15,9 @@
   "homepage": "https://github.com/ferndopolis/react-native-braintree-card/",
   "peerDependencies": {
     "react-native": ">=0.17.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.0.0",
+    "eslint": "^3.5.0"
   }
 }

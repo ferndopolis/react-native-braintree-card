@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity
+import { AppRegistry, StyleSheet, Text, View, TextInput, TouchableOpacity
 } from 'react-native';
 
 import BTClient from 'react-native-braintree-card';
@@ -20,7 +14,7 @@ export default class Example extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/get_token', {method: "GET"})
+    fetch('http://localhost:3000/get_token', {method: 'GET'})
       .then((response) => response.json())
       .then((responseData) => {
         var clientToken = responseData.clientToken;
@@ -60,7 +54,7 @@ export default class Example extends Component {
       .then(nonce => {
         console.log('Nonce: ', nonce);
         fetch('http://localhost:3000/add-payment-method', {
-          method: "POST",
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -68,7 +62,7 @@ export default class Example extends Component {
             nonce: nonce,
             name: name
           })
-        })
+        });
       })
       .catch(err => {
         console.log('ERROR with payment: ', err);
