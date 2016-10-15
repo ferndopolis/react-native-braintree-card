@@ -10,7 +10,12 @@ export default class Example extends Component {
     creditCard: '',
     expMonth: '',
     expYear: '',
-    cvc: '',
+    cvv: '',
+    street_address: '',
+    postal_code: '',
+    locality: '',
+    region: '',
+    alert: '',
   }
 
   componentDidMount() {
@@ -28,20 +33,18 @@ export default class Example extends Component {
   };
 
   sumbitForm() {
-    const { name, creditCard, expMonth, expYear, cvc } = this.state;
-    console.log('Sumbit Form: ', name, creditCard, expMonth, expYear, cvc);
+    const { name, creditCard, expMonth, expYear, cvv,
+    street_address, postal_code, locality, region } = this.state;
+    console.log('Sumbit Form: ', name, creditCard, expMonth, expYear, cvv);
     BTClient.getCardNonce({
       number: creditCard,
       expirationMonth: expMonth,
       expirationYear: expYear,
-      cvv: cvc,
-      cardholderName: 'Tee Zee Bee',
+      cvv,
+      cardholderName: name,
 
       billing_address: {
-        street_address: '123 Cools Street',
-        postal_code: '12341',
-        locality: 'Los Angeles',
-        region: 'California',
+        street_address, postal_code, locality, region,
         country_code_alpha2: 'US',
         country_name: 'United States of America',
       },
@@ -50,9 +53,9 @@ export default class Example extends Component {
         validate: false,
       }
     })
-    // BTClient.getCardNonce(creditCard, expMonth, expYear, cvc)
+    // BTClient.getCardNonce(creditCard, expMonth, expYear, cvv)
       .then(nonce => {
-        console.log('Nonce: ', nonce);
+        this.setState({alert: `Nonce: ${nonce}`});
         fetch('http://localhost:3000/add-payment-method', {
           method: 'POST',
           headers: {
@@ -62,10 +65,15 @@ export default class Example extends Component {
             nonce: nonce,
             name: name
           })
+        })
+        .then((response) => response.json())
+        .then(res => {
+          this.setState({alert: res.message});
         });
       })
       .catch(err => {
         console.log('ERROR with payment: ', err);
+        this.setState({alert: err});
       });
   }
 
@@ -119,11 +127,54 @@ export default class Example extends Component {
           <TextInput
             ref="5"
             style={styles.default}
-            placeholder="CVC"
+            placeholder="cvv"
             returnKeyType="done"
             blurOnSubmit={false}
-            value={this.state.cvc}
-            onChangeText={(cvc) => this.setState({cvc})}
+            value={this.state.cvv}
+            onChangeText={(cvv) => this.setState({cvv})}
+            onSubmitEditing={() => this.focusNextField('6')}
+          />
+        </View>
+        <Text>Billing Address: </Text>
+        <TextInput
+          ref="6"
+          style={styles.default}
+          placeholder="Address"
+          returnKeyType="done"
+          blurOnSubmit={false}
+          value={this.state.street_address}
+          onChangeText={(street_address) => this.setState({street_address})}
+          onSubmitEditing={() => this.focusNextField('7')}
+        />
+        <View style={styles.row}>
+          <TextInput
+            ref="7"
+            style={styles.default}
+            placeholder="City"
+            returnKeyType="done"
+            blurOnSubmit={false}
+            value={this.state.locality}
+            onChangeText={(locality) => this.setState({locality})}
+            onSubmitEditing={() => this.focusNextField('8')}
+          />
+          <TextInput
+            ref="8"
+            style={styles.default}
+            placeholder="State"
+            returnKeyType="done"
+            blurOnSubmit={false}
+            value={this.state.locality}
+            onChangeText={(locality) => this.setState({locality})}
+            onSubmitEditing={() => this.focusNextField('9')}
+          />
+          <TextInput
+            ref="9"
+            style={styles.default}
+            placeholder="Zip"
+            returnKeyType="done"
+            blurOnSubmit={false}
+            value={this.state.postal_code}
+            onChangeText={(postal_code) => this.setState({postal_code})}
             onSubmitEditing={() => this.sumbitForm()}
           />
         </View>
@@ -131,8 +182,9 @@ export default class Example extends Component {
           onPress={this.sumbitForm.bind(this)}
           style={styles.button}
         >
-          <Text style={styles.text}>Sumbit</Text>
+          <Text style={styles.text}>Submit</Text>
         </TouchableOpacity>
+        <Text style={styles.alert}>{this.state.alert}</Text>
       </View>
     );
   }
@@ -167,6 +219,10 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontWeight: 'bold'
+  },
+  alert: {
+    marginTop: 20,
+    color: 'blue',
   }
 });
 

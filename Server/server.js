@@ -42,13 +42,16 @@ app.post('/add-payment-method', function (req, res) {
       }, function (err, result) {
         if (result.success) {
           console.log('add-payment-method created!');
+          res.send({message: 'Payment method created!'});
         } else {
           console.log('add-payment-method failed: ', result.message);
+          res.send({message: result.message});
         }
-        res.send();
       });
     } else {
+      // FOR TEST PURPOSES BUT DONT PASS DIRECT ERROR MESSAGE FROM BRAINTREE
       console.log('Error creating customer: ', result.message);
+      res.send({message: result.message});
     }
   });
 });
