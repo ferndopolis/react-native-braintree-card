@@ -22,9 +22,12 @@ export default class Example extends Component {
     fetch('http://localhost:3000/get_token', {method: 'GET'})
       .then((response) => response.json())
       .then((responseData) => {
-        var clientToken = responseData.clientToken;
         console.log('Server responseData: ', responseData);
+        var clientToken = responseData.clientToken;
         BTClient.initWithAuthorization(clientToken);
+      })
+      .catch((err)=> {
+        console.log('Error getting clientToken: ', err);
       });
   }
 
@@ -80,27 +83,31 @@ export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          ref="1"
-          style={styles.default}
-          placeholder="Name"
-          returnKeyType="next"
-          blurOnSubmit={false}
-          value={this.state.name}
-          onChangeText={(name) => this.setState({name})}
-          onSubmitEditing={() => this.focusNextField('2')}
-        />
-        <TextInput
-          ref="2"
-          style={styles.default}
-          placeholder="Credit Card Number"
-          keyboardType="numeric"
-          returnKeyType="next"
-          value={this.state.creditCard}
-          blurOnSubmit={false}
-          onChangeText={(creditCard) => this.setState({creditCard})}
-          onSubmitEditing={() => this.focusNextField('3')}
-        />
+        <View style={styles.row}>
+          <TextInput
+            ref="1"
+            style={styles.default}
+            placeholder="Name"
+            returnKeyType="next"
+            blurOnSubmit={false}
+            value={this.state.name}
+            onChangeText={(name) => this.setState({name})}
+            onSubmitEditing={() => this.focusNextField('2')}
+          />
+        </View>
+        <View style={styles.row}>
+          <TextInput
+            ref="2"
+            style={styles.default}
+            placeholder="Credit Card Number"
+            keyboardType="numeric"
+            returnKeyType="next"
+            value={this.state.creditCard}
+            blurOnSubmit={false}
+            onChangeText={(creditCard) => this.setState({creditCard})}
+            onSubmitEditing={() => this.focusNextField('3')}
+          />
+        </View>
         <View style={styles.row}>
           <TextInput
             ref="3"
@@ -136,16 +143,18 @@ export default class Example extends Component {
           />
         </View>
         <Text>Billing Address: </Text>
-        <TextInput
-          ref="6"
-          style={styles.default}
-          placeholder="Address"
-          returnKeyType="done"
-          blurOnSubmit={false}
-          value={this.state.street_address}
-          onChangeText={(street_address) => this.setState({street_address})}
-          onSubmitEditing={() => this.focusNextField('7')}
-        />
+        <View style={styles.row}>
+          <TextInput
+            ref="6"
+            style={styles.default}
+            placeholder="Address"
+            returnKeyType="done"
+            blurOnSubmit={false}
+            value={this.state.street_address}
+            onChangeText={(street_address) => this.setState({street_address})}
+            onSubmitEditing={() => this.focusNextField('7')}
+          />
+        </View>
         <View style={styles.row}>
           <TextInput
             ref="7"
@@ -163,8 +172,8 @@ export default class Example extends Component {
             placeholder="State"
             returnKeyType="done"
             blurOnSubmit={false}
-            value={this.state.locality}
-            onChangeText={(locality) => this.setState({locality})}
+            value={this.state.region}
+            onChangeText={(region) => this.setState({region})}
             onSubmitEditing={() => this.focusNextField('9')}
           />
           <TextInput

@@ -13,5 +13,4 @@ Pod::Spec.new do |s|
   s.source_files = 'iOS/*'
 
   s.dependency 'Braintree/Card', '~> 4.0'
-  s.dependency 'React'
 end
