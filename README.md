@@ -5,6 +5,8 @@ when using a custom credit card UI.
 
 For those using the Braintree's v.zero SDK, check out [react-native-braintree](https://github.com/alawong/react-native-braintree).
 
+API supports both the initWithNumber and initWithParameters methods from Class [BTCard](http://cocoadocs.org/docsets/Braintree/4.7.4/Classes/BTCard.html).
+
 ## Usage
 
 ### Setup
@@ -19,6 +21,27 @@ BraintreeCardClient.initWithAuthorization(<token>);
 BraintreeCardClient.getCardNonce( card, expMonth, expYear, cvv, (error, nonce) => {
    // if error handle accordingly or pass nonce to your server
 });
+
+// Or with object, more info on object schema here http://cocoadocs.org/docsets/Braintree/4.7.4/Classes/BTCard.html
+BraintreeCardClient.getCardNonce(
+  {
+    number,
+    expirationMonth,
+    expirationYear,
+    cvv,
+    cardholderName,
+    billing_address: {
+      street_address, postal_code, locality, region,
+      country_code_alpha2,
+      country_name,
+    },
+    options: {
+      validate: false,
+    }
+  },
+   (error, nonce) => {
+     // if error handle accordingly or pass nonce to your server
+});
 ```
 
 ## Installation
@@ -29,13 +52,7 @@ BraintreeCardClient.getCardNonce( card, expMonth, expYear, cvv, (error, nonce) =
   # Podfile for cocoapods 1.0
   source 'https://github.com/CocoaPods/Specs.git'
   target 'yourAppTarget' do
-    pod 'React', :path => '../node_modules/react-native', :subspecs => [
-      'Core',
-      'RCTImage',
-      'RCTNetwork',
-      'RCTText',
-      'RCTWebSocket'
-    ]
+    pod 'React', :path => '../node_modules/react-native'
     pod 'react-native-braintree-card', :path => '../node_modules/react-native-braintree-card'
   end
   ```
@@ -43,13 +60,7 @@ BraintreeCardClient.getCardNonce( card, expMonth, expYear, cvv, (error, nonce) =
   Or if you use an older CocoaPods version:
   ```ruby
   source 'https://github.com/CocoaPods/Specs.git'
-  pod 'React', :path => '../node_modules/react-native', :subspecs => [
-    'Core',
-    'RCTImage',
-    'RCTNetwork',
-    'RCTText',
-    'RCTWebSocket'
-  ]
+  pod 'React', :path => '../node_modules/react-native'
   pod 'react-native-braintree-card', :path => '../node_modules/react-native-braintree-card'
   ```
 
@@ -61,11 +72,9 @@ BraintreeCardClient.getCardNonce( card, expMonth, expYear, cvv, (error, nonce) =
 
 6. Build and run project!  If it fails the first time, clean and rebuild.
 
-Because React Native's iOS code is now pulled in via CocoaPods, you also need to remove the ``React``, ``RCTImage``, etc. subprojects from your app's Xcode project.
-
 ## Requirements
 
 Tested with:
-* Node 5.6.0
-* npm 3.6.0
-* react-native 0.17.0
+* node 6.9.4
+* npm 3.10.10
+* react-native 0.42.0
