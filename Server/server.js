@@ -9,17 +9,25 @@ app.use(bodyParser.json());
 var braintree = require('braintree');
 
 require('dotenv').load();
-var gateway = braintree.connect({
-  environment:  braintree.Environment.Sandbox,
-  merchantId: process.env.BT_MERCHANT_ID,
-  publicKey: process.env.BT_PUBLIC_KEY,
-  privateKey: process.env.BT_PRIVATE_KEY
-});
+try {
+  var gateway = braintree.connect({
+    environment:  braintree.Environment.Sandbox,
+    merchantId: process.env.BT_MERCHANT_ID,
+    publicKey: process.env.BT_PUBLIC_KEY,
+    privateKey: process.env.BT_PRIVATE_KEY
+  });
+} catch(error) {
+  throw new Error('Copy example.env to .env and add your Braintree credentials');
+}
 
 app.get('/get_token', function (req, res) {
 	gateway.clientToken.generate({}, function (err, response) {
-		console.log('Client Token generated and sent');
-		res.send(response);
+    if (err) {
+      console.log('Error generating client token: ', err);
+      return res.status(500).send(err);
+    }
+		console.log('Client Token generated and sent: ', response);
+		return res.send(response);
 	});
 });
 

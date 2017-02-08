@@ -2,29 +2,21 @@ PODS:
   - Braintree/Card (4.7.0):
     - Braintree/Core
   - Braintree/Core (4.7.0)
-  - React (0.35.0):
-    - React/Core (= 0.35.0)
+  - React (0.41.2):
+    - React/Core (= 0.41.2)
   - react-native-braintree-card (0.0.1):
     - Braintree/Card (~> 4.0)
-    - React
-  - React/Core (0.35.0)
-  - React/RCTImage (0.35.0):
-    - React/Core
-    - React/RCTNetwork
-  - React/RCTNetwork (0.35.0):
-    - React/Core
-  - React/RCTText (0.35.0):
-    - React/Core
-  - React/RCTWebSocket (0.35.0):
-    - React/Core
+  - React/Core (0.41.2):
+    - React/cxxreact
+    - React/yoga
+  - React/cxxreact (0.41.2):
+    - React/jschelpers
+  - React/jschelpers (0.41.2)
+  - React/yoga (0.41.2)
 
 DEPENDENCIES:
+  - React (from `../node_modules/react-native`)
   - react-native-braintree-card (from `../node_modules/react-native-braintree-card`)
-  - React/Core (from `../node_modules/react-native`)
-  - React/RCTImage (from `../node_modules/react-native`)
-  - React/RCTNetwork (from `../node_modules/react-native`)
-  - React/RCTText (from `../node_modules/react-native`)
-  - React/RCTWebSocket (from `../node_modules/react-native`)
 
 EXTERNAL SOURCES:
   React:
@@ -34,9 +26,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Braintree: 2d53c805e93a5830a4359a757be50fc0f25392a9
-  React: d80af5410aa500d0cb1bce2cc4493a584cf2ec92
-  react-native-braintree-card: 6746efed2a191ae1c270fb0de9a5c84eeafd8cfc
+  React: 2b10c07d947dea71c144a33764e9162ed81e3825
+  react-native-braintree-card: 681ded2165297a6be929fa526c137adf259f3f0f
 
-PODFILE CHECKSUM: 82992b1277d860e6819f796c6d38d10175ddb66b
+PODFILE CHECKSUM: 73c621f98516961ec430821afb589e156b7b72fb
 
 COCOAPODS: 1.0.0
